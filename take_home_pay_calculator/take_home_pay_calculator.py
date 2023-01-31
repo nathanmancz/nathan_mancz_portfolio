@@ -8,14 +8,53 @@ BASIC_RATE_PERCENT = 0.2                    # 20% tax on salary between £12,570
 HIGHER_RATE_PERCENT = 0.4                   # 40% tax on salary between £50,270 and £150,000
 ADDITIONAL_RATE_PRECENT = 0.45              # 45% tax on salary over £150,000
 
-NI_LOWER_THRESHOLD  = 12584                 # Only pay NI if you earn over £12,584 per year (£242 pw)
-NI_HIGHER_THRESHOLD = 50270                 # Under £50,270 = 12& over £50,270 = 2%
+NI_LOWER_THRESHOLD  = 12584                 # NI paid once earning over £12, 584 per year (£242 pw)
+NI_HIGHER_THRESHOLD = 50270                 # Under £50,270 = 12% over £50,270 = 2%
 
 NI_RATE_PERCENT_UNDER_HT = 0.12             # 12% NI on salary under £50,270
 NI_RATE_PERCENT_OVER_HT = 0.02              # 2%  NI on salary over  £50,270
 
 
 # Functions
+def is_salary_valid(salary: float) -> bool:
+    """
+    This function checks that the salary input is an int or a float (AND A POSITIVE NUMBER)
+    :param salary: The users yearly gross salary
+    :return: bool, True if salary input is valid
+    """
+    if isinstance(salary, int) or isinstance(salary, float) == True:
+        is_valid = True
+    else:
+        is_valid = False
+    return is_valid
+
+
+def is_pays_pension_contributions_valid(pays_pension_contributions: str) -> bool:
+    """
+    This function checks that the pays_pension_contributions input is a string
+    :param pays_pension_contributions: The users answer Y/N 
+    :return: bool, True if pays_pension_contributions input is valid
+    """
+    if isinstance(pays_pension_contributions, str) == True:
+        is_valid = True
+    else:
+        is_valid = False
+    return is_valid
+
+
+def is_pension_contributions_percent_valid(pension_contributions_percent: float) -> bool:
+    """
+    This function checks that the pension_contributions_percent input is an int or a float
+    :param pension_contributions_percent: The users input for salary contributions amount
+    :return: bool, True if pension_contributions_percent input is valid
+    """
+    if isinstance(pension_contributions_percent, int) or isinstance(pension_contributions_percent, float) == True:
+        is_valid = True
+    else:
+        is_valid = False
+    return is_valid
+
+
 def pension_payable(salary: float, pays_pension_contributions: str, pension_contributions_percent: float) -> float:
     """
     This function calculates the amount the user will pay into their pension
@@ -103,7 +142,8 @@ def monthly_take_home_salary(salary: float, annual_take_home_salary: float) -> f
     :param annual_take_home_salary: 
     :return: float, The users monthly take home salary
     """
-    monthly_take_home_salary = annual_take_home_salary(salary, pension_payable, tax_payable, national_insurance_payable) / 12 # annual take home divided by 12 to give montlhy take home
+    # Annual take home salary divided by 12 to calculate monthly take home salary
+    monthly_take_home_salary = annual_take_home_salary(salary, pension_payable, tax_payable, national_insurance_payable) / 12 
     return monthly_take_home_salary
 
 
@@ -114,30 +154,41 @@ def weekly_take_home_salary(salary: float, annual_take_home_salary: float) -> fl
     :param annual_take_home_salary: 
     :return: float, The users weekly salary
     """
-    weekly_take_home_salary = annual_take_home_salary(salary, pension_payable, tax_payable, national_insurance_payable) / 52 # annual take home divided by 52 to give weekly take home
+    # Annual take home salary divided by 52 to calculate weekly take home salary
+    weekly_take_home_salary = annual_take_home_salary(salary, pension_payable, tax_payable, national_insurance_payable) / 52
     return weekly_take_home_salary
 
 
 # Variables
-salary = 65000                           # Enter your yearly gross salary
+salary = 27000                           # Enter your yearly gross salary
 pays_pension_contributions = "Y"         # Enter Y/N 
 pension_contributions_percent = 5        # Enter percentage of pension contributions
 
 
 # Main code
 def main():
+    # Check inputs are valid
+    while (is_salary_valid
+    or is_pays_pension_contributions_valid
+    or is_pension_contributions_percent_valid) == False:
+        print("Invalid inputs")
+        break
+            
+    
     # Salary 
     annual_take_home = annual_take_home_salary(salary, pension_payable, tax_payable, national_insurance_payable)
     monthly_take_home = monthly_take_home_salary(salary, annual_take_home_salary)
     weekly_take_home = weekly_take_home_salary(salary, annual_take_home_salary)
-    formatted_annual_take_home = "{:.2f}".format(annual_take_home)     # Limits the output to 2 decimal places
-    formatted_monthly_take_home = "{:.2f}".format(monthly_take_home)   # Limits the output to 2 decimal places
-    formatted_weekly_take_home = "{:.2f}".format(weekly_take_home)     # Limits the output to 2 decimal places
+    # Limit the salary outputs to 2 decimal places
+    formatted_annual_take_home = "{:.2f}".format(annual_take_home)   
+    formatted_monthly_take_home = "{:.2f}".format(monthly_take_home)   
+    formatted_weekly_take_home = "{:.2f}".format(weekly_take_home)     
     # Deductions
     annual_tax_deductions = tax_payable(salary)
     annual_national_insurance_deductions = national_insurance_payable(salary, pension_payable)
     annual_pension_contributions = pension_payable(salary, pays_pension_contributions, pension_contributions_percent)
-    formatted_annual_tax_deductions = "{:.2f}".format(annual_tax_deductions)
+    # Limitthe deduction outputs to 2 decimal places
+    formatted_annual_tax_deductions = "{:.2f}".format(annual_tax_deductions) 
     formatted_annual_national_insurance_deductions = "{:.2f}".format(annual_national_insurance_deductions)
     formatted_annual_pension_contributions = "{:.2f}".format(annual_pension_contributions)
     # Print statements
