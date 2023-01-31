@@ -18,7 +18,7 @@ NI_RATE_PERCENT_OVER_HT = 0.02              # 2%  NI on salary over  £50,270
 # Functions
 def is_salary_valid(salary: float) -> bool:
     """
-    This function checks that the salary input is an int or a float (AND A POSITIVE NUMBER)
+    This function checks that the salary input is an int or a float
     :param salary: The users yearly gross salary
     :return: bool, True if salary input is valid
     """
