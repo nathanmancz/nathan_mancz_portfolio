@@ -169,35 +169,38 @@ pension_contributions_percent = 5        # Enter percentage of pension contribut
 def main():
     # Check inputs are valid
     while (is_salary_valid
-    or is_pays_pension_contributions_valid
-    or is_pension_contributions_percent_valid) == False:
+        or is_pays_pension_contributions_valid
+        or is_pension_contributions_percent_valid) == False:
         print("Invalid inputs")
         break
-            
+    else:
+        # Salary 
+        annual_take_home = annual_take_home_salary(salary, pension_payable, tax_payable, national_insurance_payable)
+        monthly_take_home = monthly_take_home_salary(salary, annual_take_home_salary)
+        weekly_take_home = weekly_take_home_salary(salary, annual_take_home_salary)
     
-    # Salary 
-    annual_take_home = annual_take_home_salary(salary, pension_payable, tax_payable, national_insurance_payable)
-    monthly_take_home = monthly_take_home_salary(salary, annual_take_home_salary)
-    weekly_take_home = weekly_take_home_salary(salary, annual_take_home_salary)
-    # Limit the salary outputs to 2 decimal places
-    formatted_annual_take_home = "{:.2f}".format(annual_take_home)   
-    formatted_monthly_take_home = "{:.2f}".format(monthly_take_home)   
-    formatted_weekly_take_home = "{:.2f}".format(weekly_take_home)     
-    # Deductions
-    annual_tax_deductions = tax_payable(salary)
-    annual_national_insurance_deductions = national_insurance_payable(salary, pension_payable)
-    annual_pension_contributions = pension_payable(salary, pays_pension_contributions, pension_contributions_percent)
-    # Limitthe deduction outputs to 2 decimal places
-    formatted_annual_tax_deductions = "{:.2f}".format(annual_tax_deductions) 
-    formatted_annual_national_insurance_deductions = "{:.2f}".format(annual_national_insurance_deductions)
-    formatted_annual_pension_contributions = "{:.2f}".format(annual_pension_contributions)
-    # Print statements
-    print("Annual take home salary: £" + str(formatted_annual_take_home))
-    print("Monthly take home salary: £" + str(formatted_monthly_take_home))
-    print("Weekly take home salary: £" + str(formatted_weekly_take_home))
-    print("Annual tax deduction: £" + str(formatted_annual_tax_deductions))
-    print("Annual national insurance deductions: £" + str(formatted_annual_national_insurance_deductions))
-    print("Annual pension contributions: £" + str(formatted_annual_pension_contributions))
+        # Limit the salary outputs to 2 decimal places
+        formatted_annual_take_home = "{:.2f}".format(annual_take_home)   
+        formatted_monthly_take_home = "{:.2f}".format(monthly_take_home)   
+        formatted_weekly_take_home = "{:.2f}".format(weekly_take_home)     
+
+        # Deductions
+        annual_tax_deductions = tax_payable(salary)
+        annual_national_insurance_deductions = national_insurance_payable(salary, pension_payable)
+        annual_pension_contributions = pension_payable(salary, pays_pension_contributions, pension_contributions_percent)
+
+        # Limit the deduction outputs to 2 decimal places
+        formatted_annual_tax_deductions = "{:.2f}".format(annual_tax_deductions) 
+        formatted_annual_national_insurance_deductions = "{:.2f}".format(annual_national_insurance_deductions)
+        formatted_annual_pension_contributions = "{:.2f}".format(annual_pension_contributions)
+
+        # Print statements
+        print(f"Annual take home salary: £{formatted_annual_take_home}")
+        print(f"Monthly take home salary: £{formatted_monthly_take_home}")
+        print(f"Weekly take home salary: £{formatted_weekly_take_home}")
+        print(f"Annual tax deduction: £{formatted_annual_tax_deductions}")
+        print(f"Annual national insurance deductions: £{formatted_annual_national_insurance_deductions}")
+        print(f"Annual pension contributions: £{formatted_annual_pension_contributions}")
 
 
 if __name__ == "__main__":

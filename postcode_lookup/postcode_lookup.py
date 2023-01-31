@@ -2,7 +2,7 @@ import re
 from pandas import *
 import functions_framework
 
-data = read_csv("PostcodeTowns.csv")
+# data = read_csv("PostcodeTowns.csv")
 
 # globals
 POSTCODE_AREAS = data['Postcode_Area'].tolist() # list the postcode areas e.g. GU
