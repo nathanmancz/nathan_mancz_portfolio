@@ -2,7 +2,7 @@
     "python.testing.unittestArgs": [
         "-v",
         "-s",
-        "./rental_property_returnoninvestment",
+        "./take_home_pay_calculator",
         "-p",
         "test*.py"
     ],
