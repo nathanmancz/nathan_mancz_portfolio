@@ -1,17 +1,19 @@
+# Imported packages
 import re
 import pandas
 
+
+# Read from CSV file
 data = pandas.read_csv("postcode_lookup/postcode_towns.csv")
 
-# globals
+
+# GLOBALS
 POSTCODE_AREAS = data['Postcode_Area'].tolist() # list the postcode areas e.g. GU
 POSTCODE_NAMES = data['Postcode_Name'].tolist() # list the postcode area names e.g. Guildford
 POSTCODE_TOWNS = data['Postcode_Towns'].tolist() # list the town names 
 
 
-postcode = "gu32 3de"
-
-
+# Functions
 def is_valid(postcode: str) -> bool:
     """
     check if postcode entered matches any of the appropriate formats
@@ -47,6 +49,11 @@ def get_area_name(postcode: str) -> str:
         return POSTCODE_NAMES[postcode_area_index]
  
 
+# Variables
+postcode = "gu32 3de"
+
+
+# Main code
 def main():
     if is_valid(postcode) == False:
         print("Invalid Postcode")

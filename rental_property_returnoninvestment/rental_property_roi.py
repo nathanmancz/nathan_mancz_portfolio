@@ -1,3 +1,4 @@
+# Functions
 def decimal_to_percent(decimal):
     """
     This function converts decimals to percentages
@@ -26,11 +27,12 @@ def return_on_investment(annual_rent, purchase_price):
     return (annual_rent / purchase_price)
 
 
-# variables
+# Variables
 purchase_price = 250000.00
 monthly_rent = 1200.00
 
 
+# Main code
 def main():
     annual_rent = monthly_to_annual_rent(monthly_rent)
     annual_roi_decimal = return_on_investment(annual_rent, purchase_price)
