@@ -19,7 +19,7 @@ UNIT TESTS:
 TITLE: test_postcode_lookup
 
 DESCRIPTION:
-This unit test tests the postcode_lookup function.
+This unit test tests the postcode_lookup function using the assertEqual method.
 
 PACKAGES USED:
 unittest
@@ -29,7 +29,7 @@ unittest
 TITLE: test_postcode_validation
 
 DESCRIPTION:
-This unit test tests the postcode_validation function.
+This unit test tests the postcode_validation function using the assertTrue method.
 
 PACKAGES USED:
 unittest

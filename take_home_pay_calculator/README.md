@@ -16,7 +16,7 @@ UNIT TESTS:
 TITLE: test_pension_payable
 
 DESCRIPTION:
-This unit test tests the pension_payable function. 
+This unit test tests the pension_payable function using the assertEqual method.
 
 PACKAGES USED:
 Unittests
@@ -26,7 +26,7 @@ Unittests
 TITLE: test_tax_payable
 
 DESCRIPTION: 
-This unit test tests the tax_payable function.
+This unit test tests the tax_payable function using the assertEqual method.
 
 PACKAGES USED:
 Unittests
