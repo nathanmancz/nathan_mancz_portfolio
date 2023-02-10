@@ -1,28 +1,28 @@
 # Functions
-def decimal_to_percent(decimal):
+def decimal_to_percent(decimal: float):
     """
     This function converts decimals to percentages
-    :param decimal: 
-    :return:  
+    :param decimal: The decimal, to be converted into a percentage
+    :return: float, Returns the percentage
     """
     return "{:.2f}%".format(decimal * 100)
 
 
-def monthly_to_annual_rent(monthly_rent):
+def monthly_to_annual_rent(monthly_rent: float) -> float:
     """
     This function returns the annual rent based on the monthly rent
-    :param monthly_rent:
-    :return:
+    :param monthly_rent: The monthly rental income expected on the property
+    :return: float, The annual rental income, calculated from the monthly rent
     """
     return monthly_rent * 12
 
 
-def return_on_investment(annual_rent, purchase_price):
+def return_on_investment(annual_rent: float, purchase_price: float) -> float:
     """
     This function works out the return on investment (roi) based on annual rent and purchase price
-    :param annual_rent:
-    :param house_price:
-    :return: 
+    :param annual_rent: The annual rental income expected on the property
+    :param house_price: The price the house was purchased for 
+    :return: float, The decimnal return on investment
     """
     return (annual_rent / purchase_price)
 
