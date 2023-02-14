@@ -15,6 +15,18 @@ google_stock_data = pd.read_csv('analysing_stock_data/GOOG.csv', index_col = ['D
 tesla_stock_data = pd.read_csv('analysing_stock_data/AMZN.csv', index_col = ['Date'], parse_dates = True, usecols = ['Date', 'Adj Close'])
 
 
+# Functions
+def set_date_range(start_date: str, end_date: str):
+    """
+    This function sets the date range that the data will be read from
+    :param start_date: The start date in the date range
+    :param end_date: The end date in the date range
+    :return: list, of all dates between the given start date and given end date
+    """
+    dates = pd.date_range(start_date, end_date)
+    return dates
+
+
 # Main code
 def main():
     # Rename stock columns to specific company name
@@ -24,7 +36,7 @@ def main():
     tesla_stock = tesla_stock_data.rename(columns = {'Adj Close' : 'Tesla'})
 
     # Add stocks to the data frame between the dates chosen
-    dates = pd.date_range('2020-01-01', '2023-02-08')
+    dates = set_date_range('2021-01-01', '2023-02-08')
     all_stocks = pd.DataFrame(index = dates)
     all_stocks = all_stocks.join(amazon_stock)
     all_stocks = all_stocks.join(apple_stock)
